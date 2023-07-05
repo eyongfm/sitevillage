@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme formActualite 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+    <h1>
+       Vous êtes en mode: Modifier un Actualité!
+    </h1>
+    <br />
+ 
+    {{ form_start(formActualite) }} 
+
+    {{ form_row(formActualite.title, {'attr':{'placeholder': "Titre de l'actualité"}}) }} 
+    {{ form_row(formActualite.content, {'attr':{'placeholder': "Contenu de l'actualité"}}) }}
+    {{ form_row(formActualite.image, {'attr': {'placeholder': "URL de l'image"}}) }}
+
+    <button type="submit" class="btn btn-success">
+        Enregistrer vos modifications
+    </button> 
+
+    {{ form_end(formActualite) }}
+
+    <br />
+    
+    <a href="{{ path('administrator_setting') }}" class="btn btn-primary">Retour sur la page d'accueil Adminstrateur</a>
+    
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% form_theme formContact 'bootstrap_4_layout.html.twig' %} {# pour préciser à twig qu'On va utiliser un theme formulaire pour le formulaire formContact, apres avoir ajouter le theme dans twig.yaml #}
+
+{% block body %}
+
+    <h3 style="text-align:center;">Nous Contacter veuillez remplir le formulair ci-dessous</h3>
+    <br />
+
+    {{ form_start(formContact) }} {# this opens the form, I want to build the start of the form #}
+
+    {#{{ form_row(formContact.firstname, {'attr':{'placeholder': "entrer votre prénom"}}) }} {# le form_row nous permet d'afficher tous qu'il faut pour un champ, c'est à dire: le label, le champ et le potentiel erreurs qui sont là dédans #}
+    {#{{ form_row(formContact.lastname, {'attr':{'placeholder': "entrer votre nom"}}) }}
+    {{ form_row(formContact.email, {'attr': {'placeholder': "entrer votre adresse email"}}) }}
+    {{ form_row(formContact.phone, {'attr': {'placeholder': "entrer votre numéro de téléphone"}}) }}
+    {{ form_row(formContact.content, {'attr': {'placeholder': "entrer votre message"}}) }}  #}
+
+    {#<button type="submit" class="btn btn-success">Envoyer</button> {# add a submit button #}
+
+    <div class="row">
+        <div class="col-sm-4">
+        
+        </div>
+        <div class="col-sm-4"  style="background-color:yellow;">
+            {{ form_row(formContact.firstname, {'attr':{'placeholder': "entrer votre prénom"}}) }} {# le form_row nous permet d'afficher tous qu'il faut pour un champ, c'est à dire: le label, le champ et le potentiel erreurs qui sont là dédans #}
+            {{ form_row(formContact.lastname, {'attr':{'placeholder': "entrer votre nom"}}) }}
+            {{ form_row(formContact.email, {'attr': {'placeholder': "entrer votre adresse email"}}) }}
+            {{ form_row(formContact.phone, {'attr': {'placeholder': "entrer votre numéro de téléphone"}}) }}
+            {{ form_row(formContact.content, {'attr': {'placeholder': "entrer votre message"}}) }}
+
+            <button type="submit" class="btn btn-success">Envoyer</button> {# add a submit button #}
+        </div>
+        <div class="col-sm-4">
+        
+        </div>
+    </div>
+
+    {{ form_end(formContact) }} {# this ends the form #}
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+    <h1>Le fil mon l'Actualité</h1>
+
+    {# <p>This page displays from the database (10) all the news on the news page and a link to read more</p> #}
+
+          
+    <section class="articles">
+        <div class="row">
+            {% for actualite in actu | reverse %} {# for every article in articles in twig in the BlogController ( *'articles'* => $articles), I want you to print this article, $articles is assigned to 'articles' #} 
+                <article style="padding: 15px;">
+                    <div class="card col-m-3">
+                        <h4 class="card-header text-white bg-info">{{ actualite.title }}</h4> {# replace- Titre de l'article with article.title which is asking twig to get the title of the article, called interpolation #}
+                        {# replace the date and time here with interpolation - using a twig filter called: date... #}
+                        <div class="metadata text-center">Ecrit le {{ actualite.createdAt | date('d/m/Y') }} à {{ actualite.createdAt | date('H:i') }} dans la catégorie Politique</div> 
+                        <div class="card-body">
+                            {# replace the image here with ... #}
+                            {# <img src="{{ article.image }}" alt=""> #}
+                            <img src="{{ actualite.image }}" style="width: 100%; height: 100%;" alt=""> {# print random images from sourceUnsplash #} <br />
+                            {# replace the two paragraphs here with ... #}
+                            {{ actualite.content | slice(0, 25) | raw  }} {# filter the content with a twig filter called: raw so that it will not print out the html <p> tags #}
+                            <br />
+                            <a href="{{ path('show_actualite', {'id': actualite.id}) }}" class="btn btn-success">...Lire la suite</a> {# the path('blog_show') takes you to show.html.twig #}
+                            {# concerning above, Lorsque tu crées un lien pour voir un article, qui doit par conséquent diriger vers la vue de ta méthode show, il te faut définir le paramêtre id, soit : #}
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </section>
+
+
+{% endblock %}
+

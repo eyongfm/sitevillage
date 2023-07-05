@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}   {# inherites from the base.html.twig file - inherits the nav bar and all the css contained in this file #}
+
+{% block body %}
+    {# <article>
+            <h2>Bienvenue dans page ACtu suite</h2>
+            {{ act.title | raw }}
+            <div class="metadata">Ecrit le 19/04/2021 à 07:00 dans la catégorie Politique</div>
+            <div class="content">
+                <img src="{{ act.image }}" alt="">
+                <br />
+                {# replace the two paragraphs here with interpollation... #}
+                {#{ act.content | raw }} {# filter the content with a twig filter called: raw so that it will not print out the html <p> tags #}
+                {# <a href="{{ path('show_actualite') }}" class="btn btn-primary">Lire la suite</a>
+            </div>
+        </article> #}
+
+    <br /> <br /> 
+
+    <h2>____________ La suite de votre l'actualité _________________</h2>
+
+    <br /> <br />
+
+    <div class="row p-5">
+        <div class="col-sm-5 m-1">
+            <div class="card col-m-3">
+                <h4 class="card-header text-white bg-info">{{ act.title | raw }} </h4>
+                <div class="metadata text-center"> 
+                    Ecrit le {{ act.createdAt | date('d/m/Y') }} à {{ act.createdAt | date('H:i') }} dans la catégorie actualité 
+                </div> 
+                {# <div class="metadata">Ecrit le 19/04/2021 à 07:00 dans la catégorie Politique</div> #}
+                <div class="card-body">
+                    <img src="{{ act.image }}" style="width: 100%" alt="">
+                </div>
+            </div>   
+        </div>
+        <div class="col-sm-6 border border-success m-1">
+            <br /> <br /> 
+
+            {{ act.content | raw }}
+            
+            <br /> <br />
+
+            <a href="{{ path('actualite') }}" class="btn btn-primary">Retour sur la page d'actualités</a>
+        </div>
+    </div>  
+
+
+{% endblock %}

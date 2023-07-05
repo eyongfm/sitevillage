@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La Metéo sur Nancy{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h2 class="text-center">Température sur Nancy ce jour le</h2>
+        <br>
+        <h3 class="text-center">Actuellement il fait {{ weatherInfo.main.temp }} °C à {{ weatherInfo.name }}</h3>
+    </div>
+
+
+{% endblock %}

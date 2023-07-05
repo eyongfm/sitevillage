@@ -1,0 +1,73 @@
+{# on veut que cette vue prenne la template génerale, ie la bar de navigation etc #}
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+    <h2 style="font-size:40px">Bienvenue sur la Plaform de L'administrateur</h2>
+
+    <br />{# create two buttons, one to the left and one to the right #}
+    <a class="btn btn-info" href="{{ path('actu_create') }}">Créer un Acualité</a> {# and #} <a class="btn btn-info" href="{#{ path('evenement_create') }#}" style="float:right;">Créer un Evénement</a>
+    <br /> <br />
+    {# <div class="row">
+        <div class="col-sm-6">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ path('actu_create') }}">Créer un Acualité</a>
+                </li>
+              {#  <li class="nav-item">
+                    <a class="na<v-link" href="{{ path('actu_modify', {'id': 32}) }}">Modifier un Acualité</a> {# I add the id = 32 corresponds to the first actualite, in order for the link to the modifier un actualite to work and take us to the page#}
+               {# </li>
+               {# <li class="nav-item">
+                    <a class="nav-link" href="{{ path('delete_actualite', {'id': 42}) }}">Supprimer un Acualité</a> 
+                </li> 
+            </ul>
+<br /> 
+        </div>
+        <div class="col-sm-6">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#">Créer un Evénement</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Modifier un Evénement</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Supprimer un Evénement</a>
+                </li>
+            </ul>        
+        </div>
+
+        
+    </div>
+    #}
+   
+<div class="row align-items-start">
+    <div class="col-sm-6">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Modification</th>
+                </tr>
+            </thead>
+        
+            {% for actualite in actu | reverse %} {# for every actualite in actu in twig in the BlogController (*'actu'* => $actualite), I want you to print an actualite, $actualite is assigned to 'actu' #} 
+            <tbody>
+                <tr>
+                    <td>{{ actualite.title }}</td>
+                    <td>Ecrit le {{ actualite.createdAt | date('d/m/Y') }} à {{ actualite.createdAt | date('H:i') }} dans la catégorie Politique </td>
+                    <td> <a href="{{ path('actu_modify', {'id': actualite.id}) }}" class="btn btn-success">Edit</a></td>
+                    <td> <a href="{{ path('delete_actualite', {'id': actualite.id}) }}" class="btn btn-warning">Supprimer</a></td>     
+                </tr>
+            </tbody>          
+            {% endfor %}
+        </table>
+    </div> 
+    <div class="col-sm-6"></div> 
+
+</div> 
+
+    
+{% endblock %}

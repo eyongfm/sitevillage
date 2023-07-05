@@ -1,0 +1,113 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ACCUEIL{% endblock %}
+{#% block title %}VillageController!{% endblock %} {# ORIGINAL title of the page in the browser #}
+
+{# This page should contain what will be on my homepage that is 2 actualités and a link to continue to the actualités page and 2 events and a link to go to the events page #}
+{# the url Route here is ("/village", name="village") #}
+
+{% block body %}
+
+        <br />
+        <h1>BIENVENUE À VILLAGE</h1>
+        <hr>
+        <br />
+        <div class="row align-self-start">
+            <div class="col-sm-4">
+                <h3 style="font-type:italic; text-align: center;">ACTUALITÉS</h3>
+
+                <section class="articles">
+                    <div class="row">
+                        {% for actualite in actu | reverse | slice(0, 2) %} 
+                            <article style="padding: 15px;">
+                                <div class="card col-m-2">
+                                    <h4 class="card-header text-white bg-info">{{ actualite.title }}</h4> 
+                                    {# replace the date and time here with interpolation - using a twig filter called: date... #}
+                                    <div class="metadata text-center">Ecrit le {{ actualite.createdAt | date('d/m/Y') }} à {{ actualite.createdAt | date('H:i') }} dans la catégorie Politique</div> 
+                                    <div class="card-body">
+                                        {# replace the image here with ... #}
+                                        {# <img src="{{ article.image }}" alt=""> #}
+                                        <img src="{{ actualite.image }}" style="width: 100%;" alt=""> {# print random images from sourceUnsplash #} <br />
+                                        {# replace the two paragraphs here with ... #}
+                                        {{ actualite.content | slice(0, 25) | raw  }} {# filter the content with a twig filter called: raw so that it will not print out the html <p> tags #}
+                                        <br />
+                                        {# the path('blog_show') takes you to show.html.twig #}
+                                        <a href="{{ path('show_actualite', {'id': actualite.id}) }}" class="btn btn-success">...Lire la suite</a> 
+                                        {# concerning above, Lorsque tu crées un lien pour voir un actualité, qui doit par conséquent diriger vers la vue de ta méthode show, il te faut définir le paramêtre id, soit : #}
+                                    </div>
+                                </div>
+                            </article>
+                        {% endfor %}
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-sm-4">
+                <h3 style="font-type:italic; text-align: center;">ÉVÉNEMENTS</h3>
+            
+                <section class="articles">
+                    <div class="row">
+                        {% for evenement in events | reverse | slice(0, 2) %}  
+                            <article style="padding: 15px;">
+                                <div class="card col-m-2">
+                                    <h4 class="card-header text-white bg-info">{{ evenement.title }}</h4> 
+                                    {# replace the date and time here with interpolation - using a twig filter called: date... #}
+                                    <div class="metadata text-center">Ecrit le {{ evenement.createdAt | date('d/m/Y') }} à {{ evenement.createdAt | date('H:i') }} dans la catégorie Politique</div> 
+                                    <div class="card-body">
+                                        {# replace the image here with ... #}
+                                        {# <img src="{{ article.image }}" alt=""> #}
+                                        <img src="{{ evenement.image }}" style="width: 100%; height: 100%;" alt=""> {# print random images from sourceUnsplash #}  <br />
+                                        {# replace the two paragraphs here with ... #}
+                                        {{ evenement.content | slice(0, 25) | raw }} {# filter the content with a twig filter called: raw so that it will not print out the html <p> tags #}
+                                        <br />
+                                        {# the path('show_evenement') takes you to showEvenement.html.twig #}
+                                        <a href="{{ path('show_evenement', {'id': evenement.id}) }}" class="btn btn-success">...Lire la suite</a> 
+                                        {# concerning above, Lorsque tu crées un lien pour voir un article, qui doit par conséquent diriger vers la vue de ta méthode show, il te faut définir le paramêtre id, soit : #}
+                                    </div>
+                                </div>
+                            </article>
+                        {% endfor %}
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-sm-4"> 
+                <h3 style="font-type:italic">La Metéo du jour</h3>
+                {# <h4 class="">il fait {{ weatherInfo.main.temp | round }} °C à {{ weatherInfo.name }} {{ "now"|date('Y-m-d H:i:s') }}</h4> {# the original code #}  
+                <h4 class="">il fait {{ weatherInfo.main.temp | round }} °C à {{ weatherInfo.name }}</h4> 
+                <h4 class="">aujourd'hui le {{ "now" | date('l d F Y') }}  à  {{ "now" | date('H:i:s') }}</h4>
+                {#<h4 class="">aujourd'hui le {{  "now" | date("l") }} {{ "now"| date('Y-m-d') }}  à  {{ "now"| date('H:i:s') }}</h4> {# the "l" stands for the name of the day written out but it is in English #}
+                <h4 class="">description: {{ weatherInfo.weather.0.description }}</h4> 
+
+                {# I used the below to display now date in english above
+                {{ match.date|date("l d F - H:i") }} #}
+
+                 {# to use to display date in french, I have to download what is in the error  #}
+                 {#**** <h4 class="">aujourd'hui le {{ "now" | format_datetime(locale='fr',pattern="EEEE dd MMMM YYYY") }}</h4> #}
+
+                   {# <p>PRINTING the date of today using JAVASCRIPT INSIDE SYMFONY</p>
+                    <p>The toString() method converts a date to a string:</p>
+
+                    <p id="demo"></p>
+
+                    <script>
+                    var todayDate = new Date();
+                    document.getElementById("demo").innerHTML = todayDate.toString();
+                    </script>#} 
+
+            </div> 
+
+        </div>    
+
+        {# <br /><br />
+
+        <div class="row">
+            <div class="col">
+                second row column one
+            </div>
+
+            <div class="col">
+                
+            </div> #}
+ 
+{% endblock %}

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1"> 
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+        <link rel="stylesheet" href="https://bootswatch.com/4/solar/bootstrap.min.css">
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+        <style type="text/css">        
+        .active{
+            background-color:#d90000;
+            color:#fff;
+        }
+        body {
+        background-image: url('../assets/images/eiffelTower.PNG');
+        /*background-image: url('https://www.planetware.com/wpimages/2020/06/france-best-cities-paris.jpg');*/
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        }
+        </style>
+
+    </head>
+    <body class="bg bg-light"> {# Creating Nav Bar as from this line #}
+        <div class="container-fluid">
+            {# A standard navigation bar is created with the .navbar class, followed by a responsive collapsing class: .navbar-expand-xl|lg|md|sm:stacks the navbar vertically on extra large, large, medium or small screens #}
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+                {# this link leads to no where, it is the brand of the website or LOGO #}
+                <a class="navbar-brand" href="#" style="color:greenyellow;">MAIRIE DE VILLAGE</a> 
+                 {# create Toggler/collapsible Button, when the screen changes for responsiveness #}
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                {# Navbar links #}
+                <div class="collapse navbar-collapse" id="navbarColor02">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">  {# Initially active class is set to home(accueil) link #}
+                            <a class="nav-link" href="{{ path('accueil') }}">ACCUEIL<span class="sr-only">(current)</span></a> {# this link is to the home page, so / and name is HOME or AACUEIL #}
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('histoire') }}">HISTOIRE</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('actualite') }}">ACTUALITES</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('evenement') }}">EVENEMENTS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('contact') }}">CONTACT</a>
+                        </li>
+
+                        {# ** show login and logout button depending if I am logged in or not #}
+                        {% if not app.user %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('security_login') }}">CONNEXION</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('security_logout') }}">DECONNEXION</a>
+                            </li>
+                        {% endif %}
+
+                        
+
+                    {#  <li class="nav-item">
+                            <a class="nav-link" href="#">INSCRIPTION</a>
+                        </li> #}
+                        {#<li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                            <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Separated link</a>
+                            </div>
+                        </li>  #}
+                    </ul>
+                    {#<form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                    <button class="btn btn-info my-2 my-sm-0" type="submit">Search</button>
+                    </form> #}
+                </div>
+            </nav>
+            <div style="margin-top: 60px" /> {# the margin is the distance between the content of the website and the border of the nav bar #}
+
+
+            {# <div class="container-fluid"> #}
+                {% block body %}{% endblock %}
+            {# </div> #}
+        </div>
+
+    {# JavaScript Links #}
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      
+        {# JavaScript code for active menu #}
+            <script type="text/javascript">
+            $(function() {
+                //alert("jQuery is working");
+                $('nav a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');
+            });            
+            </script>
+
+
+        
+        {# create a footer which is fixed and has the same colour as the top nav bar#} 
+        <div style="margin-bottom:60px" /> {# the margin is the distance between the content of the website and the border of the FOOTER bar #}
+        <div class="footer">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-bottom">
+                <p style="font-size:17px; color:greenyellow;">
+                    Mairie de VILLAGE,
+                    7 rue des Palmiers,
+                    54000 France
+                </p>
+            </nav>
+        </div>
+
+        {# create a footer which is fixed but of different colour(example 1)#} 
+        {#<div style="margin-bottom:60px" /> {# the margin is the distance between the content of the website and the border of the FOOTER bar #}
+        {#<div class="footer fixed-bottom" style="background:darkgreen;">
+            <p style="margin:10px; font-size:19px; color:greenyellow;">
+                Mairie de VILLAGE,
+               7 rue de Parme,
+               54500 Vandœuvre
+            </p>
+        </div>#}
+    </body>
+</html>

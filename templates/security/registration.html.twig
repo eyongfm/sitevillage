@@ -1,0 +1,27 @@
+{# on veut que cette vue prenne la template génerale, ie la bar de navigation etc #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <br />
+    <h2>Inscription sur le site en tant que adminstrateur du site</h2>
+    <br />
+
+    {# je ecris le code pour affichier mon formulaire avec form_widget, qui n'a pas de placeholder, si je veux des placeholder, il faut utiliser form_row #}
+   {#  {{ form_start(formRegistration) }}
+    {{ form_widget(formRegistration) }}
+    <button type="submit" class="btn btn-success">Inscription !</button>
+    {{ form_end(formRegistration) }} #}
+
+
+    {# je ecris le code pour affichier mon formulaire avec form_row, qui a des placeholder #}
+    {{ form_start(formRegistration) }}  {# formRegistration is coming from the SecurityController #}
+
+    {{ form_row(formRegistration.username, {'label': 'Nom d\'utilisateur','attr': {'placeholder': 'User name ...'}}) }}
+    {{ form_row(formRegistration.password, {'label': 'Mot de passe', 'attr': {'placeholder': 'Mot de passe !'}}) }}
+    {{ form_row(formRegistration.confirm_password, {'label': 'Confirmatin du mot de passe', 'attr': {'placeholder': 'Répétez votre mot de passe'}}) }}
+
+    <button type="submit" class="btn btn-success">Inscription</button>
+    {{ form_end(formRegistration) }}
+
+{% endblock %}
