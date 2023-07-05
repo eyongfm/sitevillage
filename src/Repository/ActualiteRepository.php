@@ -18,7 +18,6 @@ class ActualiteRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Actualite::class);
     }
-
     // /**
     //  * @return Actualite[] Returns an array of Actualite objects
     //  */
@@ -35,8 +34,6 @@ class ActualiteRepository extends ServiceEntityRepository
         ;
     }
     */
-    
-
     /*
     public function findOneBySomeField($value): ?Actualite
     {
